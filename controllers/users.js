@@ -1,4 +1,5 @@
-import { response } from 'express'
+import { response } from 'express'; 
+import User from '../models/user.js'
 
 
 const getUsers = (request, response = response) => {
@@ -12,17 +13,20 @@ const getUsers = (request, response = response) => {
     })
 }
 
-const postUsers = (request, response = response) => {
+const postUsers = async (request, response = response) => {
     const body = request.body;
+    const user = new User(body);
+
+    await user.save();
 
     response.json({
         message: 'POST Controller',
-        body
+        user
     })
 }
 
 const putUsers = (request, response = response) => {
-    
+
     /** Segment params */
     const { id } = request.params;
 
