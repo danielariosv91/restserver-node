@@ -4,10 +4,10 @@ import { deleteUsers, getUsers, patchUsers, postUsers, putUsers } from '../contr
 const router = Router();
 
 router.get('/', getUsers);
-router.put('/', postUsers);
+router.post('/', postUsers);
 router.patch('/', patchUsers);
 router.put('/', putUsers);
-router.patch('/', deleteUsers);
+router.delete('/', deleteUsers);
 
 export {
     router,
