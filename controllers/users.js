@@ -1,4 +1,6 @@
-import { response } from 'express'; 
+import { response } from 'express';
+import bcryptjs from 'bcryptjs'
+
 import User from '../models/user.js'
 
 
@@ -13,10 +15,17 @@ const getUsers = (request, response = response) => {
     })
 }
 
-const postUsers = async (request, response = response) => {
-    const body = request.body;
-    const user = new User(body);
+const postUsers = async (request, response) => {
+    const { name, email, password, role } = request.body;
+    const user = new User({ name, email, password, role });
 
+    /** Verify if email exists */
+
+    /** Hash password */
+    const salt = bcryptjs.genSaltSync();
+    user.password = bcryptjs.hashSync(password, salt);
+
+    /** Sabe on DB */
     await user.save();
 
     response.json({
