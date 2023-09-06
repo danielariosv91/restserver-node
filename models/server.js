@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+import { router } from '../routes/users.js'
 
 class Server {
     constructor() {
@@ -12,36 +14,15 @@ class Server {
     }
 
     middlewares = () => {
+        /** Cors */
+        this.app.use(cors())
+
         /** Public Directory */
         this.app.use(express.static('public'));
     }
 
     routes = () => {
-        this.app.get('/api', (request, response) => {
-            response.json({
-                message: 'GET API'
-            })
-        })
-        this.app.put('/api', (request, response) => {
-            response.json({
-                message: 'PUT API'
-            })
-        })
-        this.app.patch('/api', (request, response) => {
-            response.json({
-                message: 'PATCH API'
-            })
-        })
-        this.app.post('/api', (request, response) => {
-            response.json({
-                message: 'POST API'
-            })
-        })
-        this.app.delete('/api', (request, response) => {
-            response.json({
-                message: 'DELETE API'
-            })
-        })
+        this.app.use('/api/users', router)
     }
 
     start = () => {
