@@ -2,7 +2,12 @@ import { response } from 'express'
 
 
 const getUsers = (request, response = response) => {
+
+    /** Query params */
+    const { limit = '' } = request.query;
+
     response.json({
+        limit,
         message: 'GET Controller'
     })
 }
@@ -11,14 +16,19 @@ const postUsers = (request, response = response) => {
     const body = request.body;
 
     response.json({
-        message: 'POST Controller', 
+        message: 'POST Controller',
         body
     })
 }
 
 const putUsers = (request, response = response) => {
+    
+    /** Segment params */
+    const { id } = request.params;
+
     response.json({
-        message: 'PUT Controller'
+        id,
+        message: 'PUT Controller',
     })
 }
 
@@ -36,7 +46,7 @@ const deleteUsers = (request, response = response) => {
 export {
     getUsers,
     postUsers,
-    putUsers, 
+    putUsers,
     patchUsers,
     deleteUsers
 }
