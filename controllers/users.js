@@ -1,7 +1,9 @@
 import { response } from 'express';
+import { validationResult } from 'express-validator';
 import bcryptjs from 'bcryptjs'
 
 import User from '../models/user.js'
+
 
 
 const getUsers = (request, response = response) => {
@@ -16,16 +18,29 @@ const getUsers = (request, response = response) => {
 }
 
 const postUsers = async (request, response) => {
+    const errors = validationResult(request);
+
+    if (!errors.isEmpty()) {
+        return response.status(400).json(errors)
+    }
+
     const { name, email, password, role } = request.body;
     const user = new User({ name, email, password, role });
 
     /** Verify if email exists */
+    const existsEmail = await User.findOne({ email });
+
+    if (existsEmail) {
+        return response.status(400).json({
+            error: 'Email already exists'
+        })
+    }
 
     /** Hash password */
     const salt = bcryptjs.genSaltSync();
     user.password = bcryptjs.hashSync(password, salt);
 
-    /** Sabe on DB */
+    /** Save on DB */
     await user.save();
 
     response.json({
