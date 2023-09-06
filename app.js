@@ -5,4 +5,3 @@ const server = new Server();
 
 /** start serve */
 server.start();
-server.start();
