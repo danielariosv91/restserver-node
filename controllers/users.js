@@ -8,8 +8,11 @@ const getUsers = (request, response = response) => {
 }
 
 const postUsers = (request, response = response) => {
+    const body = request.body;
+
     response.json({
-        message: 'POST Controller'
+        message: 'POST Controller', 
+        body
     })
 }
 
