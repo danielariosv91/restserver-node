@@ -54,7 +54,7 @@ simple-rest-server/
 3. Install the required npm packages:
 
    ```bash
-   npm install
+   npm installx
    ```
 
 ## Usage
@@ -70,15 +70,3 @@ simple-rest-server/
 3. Create new controllers in the `controllers` directory, define your routes in the `routes` directory, and interact with data models in the `models` directory.
 
 4. Add your business logic, data validation, and database interactions to the respective files.
-
-## Credits
-
-This template was created by [Your Name]. You can find the source code on GitHub: [simple-rest-server](https://github.com/yourusername/simple-rest-server).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Thank you for using the Simple REST Server template. It's a great starting point for building RESTful APIs with Node.js and Express. If you have any questions or feedback, feel free to contact us.
